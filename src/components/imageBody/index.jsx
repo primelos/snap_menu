@@ -19,6 +19,7 @@ const ImageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right: 269px;
 `;
 
 const ImageGuy = styled.img`

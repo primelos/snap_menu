@@ -6,8 +6,10 @@ import styled from "styled-components";
 const BodyContainer = () => {
   return (
     <BodyWrapper>
-      <Title />
-      <ImageBody />
+      <Container>
+        <Title />
+        <ImageBody />
+      </Container>
     </BodyWrapper>
   );
 };
@@ -15,8 +17,14 @@ const BodyContainer = () => {
 export default BodyContainer;
 
 const BodyWrapper = styled.div`
+  width: 100%;
+`;
+
+const Container = styled.div`
   display: flex;
+  margin: auto;
   justify-content: center;
   align-items: center;
   height: 80vh;
+  width: 80%;
 `;
