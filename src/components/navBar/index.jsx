@@ -9,12 +9,29 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { TextsmsRounded } from "@mui/icons-material";
+import { createTheme } from "@mui/material/styles";
 
 const NavBar = () => {
   const [popOver1, setPopover1] = useState({ anchorEl: null });
   const [popOver2, setPopover2] = useState({ anchorEl: null });
   // const [anchorEl, setAnchorEl] = React.useState(null);
   const navRef = useRef(null);
+
+  const theme = createTheme({
+    status: {
+      danger: "#e53e3e",
+    },
+    palette: {
+      primary: {
+        main: "#0971f1",
+        darker: "#053e85",
+      },
+      neutral: {
+        main: "#64748B",
+        contrastText: "#fff",
+      },
+    },
+  });
 
   // const handleClick = (event) => {
   //   // navRef.current =
@@ -108,15 +125,18 @@ const NavBar = () => {
           About
         </Button>
       </NavWrapper>
-      <NavWrapper>{/* //material ui iconsNavBarContainer */}</NavWrapper>
-      <NavButtonWrapper>
-        <Button variant="text" color="secondary">
-          Login
-        </Button>
-        <Button variant="text" color="secondary" sx={{ border: "solid 1px" }}>
-          Register
-        </Button>
-      </NavButtonWrapper>
+      <LoginWrapper>
+        {/* //material ui iconsNavBarContainer */}
+
+        <NavButtonWrapper>
+          <Button variant="text" color="secondary">
+            Login
+          </Button>
+          <Button variant="text" color="secondary" sx={{ border: "solid 1px" }}>
+            Register
+          </Button>
+        </NavButtonWrapper>
+      </LoginWrapper>
     </NavBarContainer>
   );
 };
@@ -143,6 +163,12 @@ const NavWrapper = styled.nav`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  /* flex: 1; */
+`;
+
+const LoginWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
   flex: 1;
 `;
 
