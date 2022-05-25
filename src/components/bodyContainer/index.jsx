@@ -18,6 +18,9 @@ export default BodyContainer;
 
 const BodyWrapper = styled.div`
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Container = styled.div`
@@ -26,5 +29,6 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   height: 80vh;
-  width: 80%;
+  width: 1370px;
+  margin: 0 104px;
 `;

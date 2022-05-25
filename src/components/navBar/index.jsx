@@ -46,7 +46,10 @@ const NavBar = () => {
   };
 
   const testMe = (e) => {
-    e.target.childNodes[0].textContent === "Features"
+    console.log(e.target.childNodes[0]);
+    console.log("navRef", navRef);
+    e.target.childNodes[0].textContent === "eatures" ||
+    e.target.childNodes[0].textContent === "F"
       ? setPopover1({ ...popOver1, anchorEl: e.currentTarget })
       : setPopover2({ ...popOver2, anchorEl: e.currentTarget });
   };
@@ -59,22 +62,23 @@ const NavBar = () => {
         <img src="/images/logo.svg" alt="" />
       </NavImgWrapper>
       <NavWrapper>
-        <Button
+        <NavMenuButton
+          ref={navRef}
           aria-describedby={"pop1"}
           variant="text"
           color="secondary"
           onClick={testMe}
         >
-          Features
+          F<span style={{ textTransform: "lowercase" }}>eatures</span>
           {popOver1.anchorEl ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-        </Button>
+        </NavMenuButton>
         <Popover
           id={"pop1"}
           open={Boolean(popOver1.anchorEl)}
           anchorEl={popOver1.anchorEl}
           onClose={handleClose}
           anchorReference="anchorPosition"
-          anchorPosition={{ top: 272, left: 163 }}
+          anchorPosition={{ top: 290, left: 97 }}
           anchorOrigin={{
             vertical: "bottom",
             horizontal: "left",
@@ -84,27 +88,47 @@ const NavBar = () => {
             horizontal: "left",
           }}
         >
-          <Typography sx={{ p: 2 }}>Todo List</Typography>
-          <Typography sx={{ p: 2 }}>Calender</Typography>
-          <Typography sx={{ p: 2 }}>Reminders</Typography>
-          <Typography sx={{ p: 2 }}>Planning</Typography>
+          <TypographyContainer sx={{ p: 2 }}>
+            <IconContainer>
+              <IconImage src="/images/icon-todo.svg" />
+            </IconContainer>
+            Todo List
+          </TypographyContainer>
+          <TypographyContainer sx={{ p: 2 }}>
+            <IconContainer>
+              <IconImage src="/images/icon-calendar.svg" />
+            </IconContainer>
+            Calender
+          </TypographyContainer>
+          <TypographyContainer sx={{ p: 2 }}>
+            <IconContainer>
+              <IconImage src="/images/icon-reminders.svg" />
+            </IconContainer>
+            Reminders
+          </TypographyContainer>
+          <TypographyContainer sx={{ p: 2 }}>
+            <IconContainer>
+              <IconImage src="/images/icon-planning.svg" />
+            </IconContainer>
+            Planning
+          </TypographyContainer>
         </Popover>
-        <Button
+        <NavMenu
           aria-describedby={"pop2"}
           variant="text"
           color="secondary"
           onClick={testMe}
         >
-          Company
+          C<span style={{ textTransform: "lowercase" }}>ompany</span>
           {popOver2.anchorEl ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-        </Button>
+        </NavMenu>
         <Popover
           id={"pop2"}
           open={Boolean(popOver2.anchorEl)}
           anchorEl={popOver2.anchorEl}
           onClose={handleClose}
           anchorReference="anchorPosition"
-          anchorPosition={{ top: 325, left: 658 }}
+          anchorPosition={{ top: 65, left: 310 }}
           anchorOrigin={{
             vertical: "center",
             horizontal: "right",
@@ -114,27 +138,31 @@ const NavBar = () => {
             horizontal: "center",
           }}
         >
-          <Typography sx={{ p: 2 }}>History</Typography>
-          <Typography sx={{ p: 2 }}>Our Team</Typography>
-          <Typography sx={{ p: 2 }}>Blog</Typography>
+          <TypographyContainer sx={{ p: 2 }}>History</TypographyContainer>
+          <TypographyContainer sx={{ p: 2 }}>Our Team</TypographyContainer>
+          <TypographyContainer sx={{ p: 2 }}>Blog</TypographyContainer>
         </Popover>
         <Button variant="text" color="secondary">
-          Careers
+          C<span style={{ textTransform: "lowercase" }}>areers</span>
         </Button>
         <Button variant="text" color="secondary">
-          About
+          A<span style={{ textTransform: "lowercase" }}>bout</span>
         </Button>
       </NavWrapper>
       <LoginWrapper>
         {/* //material ui iconsNavBarContainer */}
 
         <NavButtonWrapper>
-          <Button variant="text" color="secondary">
-            Login
-          </Button>
-          <Button variant="text" color="secondary" sx={{ border: "solid 1px" }}>
-            Register
-          </Button>
+          <LoginButton variant="text" color="secondary">
+            L<span style={{ textTransform: "lowercase" }}>ogin</span>
+          </LoginButton>
+          <RegisterButton
+            variant="text"
+            color="secondary"
+            sx={{ border: "solid 1px" }}
+          >
+            R<span style={{ textTransform: "lowercase" }}>egister</span>
+          </RegisterButton>
         </NavButtonWrapper>
       </LoginWrapper>
     </NavBarContainer>
@@ -174,4 +202,58 @@ const LoginWrapper = styled.div`
 
 const NavButtonWrapper = styled.section`
   margin-right: 30px;
+`;
+
+const LoginButton = styled(Button)`
+  border-radius: 10px !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  margin-right: 10px !important;
+  &:hover {
+    color: black !important;
+    background-color: transparent !important;
+  }
+`;
+
+const RegisterButton = styled(Button)`
+  border-radius: 10px !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+
+  &:hover {
+    border: 1px black solid !important;
+    color: black !important;
+    background-color: transparent !important;
+  }
+`;
+
+const IconContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+`;
+
+const IconImage = styled.img`
+  width: 20px;
+  height: 20px;
+`;
+
+const TypographyContainer = styled(Typography)`
+  display: flex;
+  /* justify-content: space-between !important; */
+  align-items: center;
+  color: #838783 !important;
+`;
+
+const NavMenuButton = styled(Button)`
+  &:hover {
+    background-color: transparent !important;
+  }
+`;
+
+const NavMenu = styled(Button)`
+  &:hover {
+    background-color: transparent !important;
+  }
 `;
