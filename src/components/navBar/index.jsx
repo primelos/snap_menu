@@ -8,12 +8,12 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import { TextsmsRounded } from "@mui/icons-material";
 import { createTheme } from "@mui/material/styles";
 
 const NavBar = () => {
   const [popOver1, setPopover1] = useState({ anchorEl: null });
   const [popOver2, setPopover2] = useState({ anchorEl: null });
+  const [menuOpen, setMenuOpen] = useState(false);
   // const [anchorEl, setAnchorEl] = React.useState(null);
   const navRef = useRef(null);
 
@@ -52,6 +52,16 @@ const NavBar = () => {
     e.target.childNodes[0].textContent === "F"
       ? setPopover1({ ...popOver1, anchorEl: e.currentTarget })
       : setPopover2({ ...popOver2, anchorEl: e.currentTarget });
+  };
+
+  const handleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
   };
 
   // const open = Boolean(anchorEl);
@@ -165,6 +175,105 @@ const NavBar = () => {
           </RegisterButton>
         </NavButtonWrapper>
       </LoginWrapper>
+      <NavMobileWrapper>
+        {menuOpen ? (
+          // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+          // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+          // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+          <NavMobileMenuOpen>
+            <NavMobileCloseWrapper>
+              <NavMobileClose
+                onClick={() => handleMenu()}
+                src="/images/icon-close-menu.svg"
+              />
+            </NavMobileCloseWrapper>
+            <Accordion
+              expanded={expanded === "panel1"}
+              onChange={handleChange("panel1")}
+            >
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1bh-content"
+                id="panel1bh-header"
+              >
+                <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                  Features
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails></AccordionDetails>
+            </Accordion>
+            <Accordion
+              expanded={expanded === "panel2"}
+              onChange={handleChange("panel2")}
+            >
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel2bh-content"
+                id="panel2bh-header"
+              >
+                <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                  Company
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography>
+                  Donec placerat, lectus sed mattis semper, neque lectus feugiat
+                  lectus, varius pulvinar diam eros in elit. Pellentesque
+                  convallis laoreet laoreet.
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+            <Accordion
+              expanded={expanded === "panel3"}
+              onChange={handleChange("panel3")}
+            >
+              <AccordionSummary
+                aria-controls="panel3bh-content"
+                id="panel3bh-header"
+              >
+                <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                  Careers
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography>
+                  Nunc vitae orci ultricies, auctor nunc in, volutpat nisl.
+                  Integer sit amet egestas eros, vitae egestas augue. Duis vel
+                  est augue.
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+            <Accordion
+              expanded={expanded === "panel4"}
+              onChange={handleChange("panel4")}
+            >
+              <AccordionSummary
+                aria-controls="panel4bh-content"
+                id="panel4bh-header"
+              >
+                <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                  About
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography>
+                  Nunc vitae orci ultricies, auctor nunc in, volutpat nisl.
+                  Integer sit amet egestas eros, vitae egestas augue. Duis vel
+                  est augue.
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+            <p>HEllo</p>
+            <p>HEllo</p>
+            <p>HEllo</p>
+          </NavMobileMenuOpen>
+        ) : (
+          <NavMobileMenu
+            onClick={() => handleMenu()}
+            src="/images/icon-menu.svg"
+          />
+        )}
+      </NavMobileWrapper>
     </NavBarContainer>
   );
 };
@@ -177,6 +286,10 @@ const NavBarContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  @media screen and (max-width: 450px) {
+    justify-content: space-between;
+    margin-right: 30px;
+  }
 `;
 
 const NavImgWrapper = styled.div`
@@ -192,12 +305,18 @@ const NavWrapper = styled.nav`
   justify-content: space-evenly;
   align-items: center;
   /* flex: 1; */
+  @media screen and (max-width: 450px) {
+    display: none;
+  }
 `;
 
 const LoginWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   flex: 1;
+  @media screen and (max-width: 450px) {
+    display: none;
+  }
 `;
 
 const NavButtonWrapper = styled.section`
@@ -257,3 +376,29 @@ const NavMenu = styled(Button)`
     background-color: transparent !important;
   }
 `;
+
+const NavMobileWrapper = styled.div``;
+
+const NavMobileMenu = styled.img`
+  display: none;
+
+  @media screen and (max-width: 450px) {
+    display: block;
+    width: 20px;
+    height: 20px;
+  }
+`;
+const NavMobileClose = styled.img`
+  display: none;
+  @media screen and (max-width: 450px) {
+    display: block;
+    width: 20px;
+    height: 20px;
+  }
+`;
+
+const NavMobileMenuOpen = styled.div`
+  background-color: #d3eeee;
+`;
+
+const NavMobileCloseWrapper = styled.div``;
