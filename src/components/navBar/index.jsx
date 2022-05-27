@@ -9,11 +9,13 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { createTheme } from "@mui/material/styles";
+import Avatar from "@mui/material/Avatar";
+import CardHeader from "@mui/material/CardHeader";
 
-const NavBar = () => {
+const NavBar = ({ menuOpen, setMenuOpen }) => {
   const [popOver1, setPopover1] = useState({ anchorEl: null });
   const [popOver2, setPopover2] = useState({ anchorEl: null });
-  const [menuOpen, setMenuOpen] = useState(false);
+  // const [menuOpen, setMenuOpen] = useState(false);
   // const [anchorEl, setAnchorEl] = React.useState(null);
   const navRef = useRef(null);
 
@@ -108,7 +110,7 @@ const NavBar = () => {
             <IconContainer>
               <IconImage src="/images/icon-calendar.svg" />
             </IconContainer>
-            Calender
+            Calendar
           </TypographyContainer>
           <TypographyContainer sx={{ p: 2 }}>
             <IconContainer>
@@ -200,7 +202,56 @@ const NavBar = () => {
                   Features
                 </Typography>
               </AccordionSummary>
-              <AccordionDetails></AccordionDetails>
+              <AccordionDetails>
+                <CardHeaderContainer
+                  avatar={
+                    <AvatarContainer aria-label="recipe">
+                      <img
+                        style={{ width: "24px", height: "auto" }}
+                        src="/images/icon-todo.svg"
+                        alt="todo list"
+                      />
+                    </AvatarContainer>
+                  }
+                  title="Todo List"
+                />
+                <CardHeaderContainer
+                  avatar={
+                    <AvatarContainer aria-label="recipe">
+                      <img
+                        style={{ width: "24px", height: "auto" }}
+                        src="/images/icon-calendar.svg"
+                        alt="calendar"
+                      />
+                    </AvatarContainer>
+                  }
+                  title="Calendar"
+                />
+                <CardHeaderContainer
+                  avatar={
+                    <AvatarContainer aria-label="recipe">
+                      <img
+                        style={{ width: "24px", height: "auto" }}
+                        src="/images/icon-reminders.svg"
+                        alt="reminders"
+                      />
+                    </AvatarContainer>
+                  }
+                  title="Reminders"
+                />
+                <CardHeaderContainer
+                  avatar={
+                    <AvatarContainer aria-label="recipe">
+                      <img
+                        style={{ width: "24px", height: "auto" }}
+                        src="/images/icon-planning.svg"
+                        alt="planning"
+                      />
+                    </AvatarContainer>
+                  }
+                  title="Planning"
+                />
+              </AccordionDetails>
             </Accordion>
             <Accordion
               expanded={expanded === "panel2"}
@@ -216,11 +267,9 @@ const NavBar = () => {
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <Typography>
-                  Donec placerat, lectus sed mattis semper, neque lectus feugiat
-                  lectus, varius pulvinar diam eros in elit. Pellentesque
-                  convallis laoreet laoreet.
-                </Typography>
+                <CardHeaderContainer title="History" />
+                <CardHeaderContainer title="Our Team" />
+                <CardHeaderContainer title="Blog" />
               </AccordionDetails>
             </Accordion>
             <Accordion
@@ -235,13 +284,6 @@ const NavBar = () => {
                   Careers
                 </Typography>
               </AccordionSummary>
-              <AccordionDetails>
-                <Typography>
-                  Nunc vitae orci ultricies, auctor nunc in, volutpat nisl.
-                  Integer sit amet egestas eros, vitae egestas augue. Duis vel
-                  est augue.
-                </Typography>
-              </AccordionDetails>
             </Accordion>
             <Accordion
               expanded={expanded === "panel4"}
@@ -255,17 +297,7 @@ const NavBar = () => {
                   About
                 </Typography>
               </AccordionSummary>
-              <AccordionDetails>
-                <Typography>
-                  Nunc vitae orci ultricies, auctor nunc in, volutpat nisl.
-                  Integer sit amet egestas eros, vitae egestas augue. Duis vel
-                  est augue.
-                </Typography>
-              </AccordionDetails>
             </Accordion>
-            <p>HEllo</p>
-            <p>HEllo</p>
-            <p>HEllo</p>
           </NavMobileMenuOpen>
         ) : (
           <NavMobileMenu
@@ -281,11 +313,12 @@ const NavBar = () => {
 export default NavBar;
 
 const NavBarContainer = styled.div`
-  margin-top: 20px;
+  padding-top: 20px;
   margin-bottom: 60px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  position: relative;
   @media screen and (max-width: 450px) {
     justify-content: space-between;
     margin-right: 30px;
@@ -392,13 +425,34 @@ const NavMobileClose = styled.img`
   display: none;
   @media screen and (max-width: 450px) {
     display: block;
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: auto;
+    padding-right: 27px;
   }
 `;
 
 const NavMobileMenuOpen = styled.div`
-  background-color: #d3eeee;
+  padding-top: 23px;
+  position: absolute;
+  top: 0px;
+  height: 100vh;
+  right: -30px;
+  left: 130px;
+  z-index: 1;
+  background-color: white;
 `;
 
-const NavMobileCloseWrapper = styled.div``;
+const NavMobileCloseWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
+const CardHeaderContainer = styled(CardHeader)`
+  text-align: start !important;
+  padding: 0 !important;
+`;
+
+const AvatarContainer = styled(Avatar)`
+  background-color: transparent !important;
+`;

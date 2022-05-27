@@ -12,6 +12,48 @@ code {
     monospace;
 }
 
-  .MuiButton-textSecondary{
-    color: #838783 !important;
-  }
+.MuiButton-textSecondary{
+  color: #838783 !important;
+}
+
+.css-et1ao3-MuiTypography-root {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5rem !important;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #838783;
+}
+
+.css-1m4ljmh-MuiTypography-root, .css-1qvr50w-MuiTypography-root {
+  font-size: 1.5rem !important;
+  color: #838783;
+}
+
+.css-1qvr50w-MuiTypography-root{
+  padding: 10px 0 10px 16px;
+}
+
+.css-sh22l5-MuiButtonBase-root-MuiAccordionSummary-root{
+  justify-content: flex-start !important;
+}
+
+.css-o4b71y-MuiAccordionSummary-content {
+  flex: 0   !important;
+}
+
+
+
+.css-1elwnq4-MuiPaper-root-MuiAccordion-root{
+  box-shadow: none !important;
+  position: unset   !important;
+}
+
+
+/* .css-i4bv87-MuiSvgIcon-root{
+  padding-left: 10px;
+
+} */
+
+.css-yw020d-MuiAccordionSummary-expandIconWrapper{
+    padding-left: 10px;
+}
