@@ -8,19 +8,15 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import { createTheme } from "@mui/material/styles";
 import Avatar from "@mui/material/Avatar";
 import CardHeader from "@mui/material/CardHeader";
 
 const NavBar = ({ menuOpen, setMenuOpen }) => {
   const [popOver1, setPopover1] = useState({ anchorEl: null });
   const [popOver2, setPopover2] = useState({ anchorEl: null });
-  // const [menuOpen, setMenuOpen] = useState(false);
-  // const [anchorEl, setAnchorEl] = React.useState(null);
   const navRef = useRef();
 
   const handleClose = () => {
-    // setAnchorEl(null);
     setPopover1({ anchorEl: null });
     setPopover2({ anchorEl: null });
   };
@@ -33,8 +29,6 @@ const NavBar = ({ menuOpen, setMenuOpen }) => {
   };
 
   useEffect(() => {
-    let test = navRef.current;
-    console.log(test);
     function handleClickOutside(event) {
       if (navRef.current && !navRef.current.contains(event.target)) {
         setMenuOpen(false);
@@ -50,10 +44,6 @@ const NavBar = ({ menuOpen, setMenuOpen }) => {
   }, [setMenuOpen, navRef]);
 
   const handleMenu = (e) => {
-    console.log("e", e);
-    // useRef(e.currentTarget).childNodes[0].textContent === "Features"
-    // navRef.current = e.target.
-
     setMenuOpen(!menuOpen);
   };
 
@@ -64,12 +54,10 @@ const NavBar = ({ menuOpen, setMenuOpen }) => {
     setExpanded(isExpanded ? panel : false);
   };
 
-  // const open = Boolean(anchorEl);
-  // const id = open ? "simple-popover" : undefined;
   return (
     <NavBarContainer>
       <NavImgWrapper>
-        <img src="/images/logo.svg" alt="" />
+        <img src="/images/logo.svg" alt="icon-logo" />
       </NavImgWrapper>
       <NavWrapper>
         <NavMenu
@@ -99,25 +87,28 @@ const NavBar = ({ menuOpen, setMenuOpen }) => {
         >
           <TypographyContainer sx={{ p: 2 }}>
             <IconContainer>
-              <IconImage src="/images/icon-todo.svg" />
+              <IconImage src="/images/icon-todo.svg" alt="icon-todo" />
             </IconContainer>
             Todo List
           </TypographyContainer>
           <TypographyContainer sx={{ p: 2 }}>
             <IconContainer>
-              <IconImage src="/images/icon-calendar.svg" />
+              <IconImage src="/images/icon-calendar.svg" alt="icon-calender" />
             </IconContainer>
             Calendar
           </TypographyContainer>
           <TypographyContainer sx={{ p: 2 }}>
             <IconContainer>
-              <IconImage src="/images/icon-reminders.svg" />
+              <IconImage
+                src="/images/icon-reminders.svg"
+                alt="icon-reminders"
+              />
             </IconContainer>
             Reminders
           </TypographyContainer>
           <TypographyContainer sx={{ p: 2 }}>
             <IconContainer>
-              <IconImage src="/images/icon-planning.svg" />
+              <IconImage src="/images/icon-planning.svg" alt="icon-planning" />
             </IconContainer>
             Planning
           </TypographyContainer>
@@ -159,8 +150,6 @@ const NavBar = ({ menuOpen, setMenuOpen }) => {
         </Button>
       </NavWrapper>
       <LoginWrapper>
-        {/* //material ui iconsNavBarContainer */}
-
         <NavButtonWrapper>
           <LoginButton
             variant="text"
@@ -180,14 +169,12 @@ const NavBar = ({ menuOpen, setMenuOpen }) => {
       </LoginWrapper>
       <NavMobileWrapper>
         {menuOpen ? (
-          // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
-          // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
-          // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
           <NavMobileMenuOpen ref={navRef}>
             <NavMobileCloseWrapper>
               <NavMobileClose
                 onClick={() => handleMenu()}
                 src="/images/icon-close-menu.svg"
+                alt="icon-close-menu"
               />
             </NavMobileCloseWrapper>
             <Accordion
@@ -311,6 +298,7 @@ const NavBar = ({ menuOpen, setMenuOpen }) => {
           <NavMobileMenu
             onClick={(e) => handleMenu(e)}
             src="/images/icon-menu.svg"
+            alt="menu"
           />
         )}
       </NavMobileWrapper>
@@ -346,7 +334,6 @@ const NavWrapper = styled.nav`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  /* flex: 1; */
   @media screen and (max-width: 450px) {
     display: none;
   }
@@ -391,9 +378,8 @@ const RegisterButton = styled(Button)`
   border-radius: 12px !important;
   padding-left: 20px !important;
   padding-right: 20px !important;
-
   &:hover {
-    border: 1px black solid !important;
+    border: 2px black solid !important;
     color: black !important;
     background-color: transparent !important;
   }
@@ -419,15 +405,8 @@ const IconImage = styled.img`
 
 const TypographyContainer = styled(Typography)`
   display: flex;
-  /* justify-content: space-between !important; */
   align-items: center;
   color: #6b6d6b !important;
-`;
-
-const NavMenuButton = styled(Button)`
-  &:hover {
-    background-color: transparent !important;
-  }
 `;
 
 const NavMenu = styled(Button)`
@@ -470,9 +449,6 @@ const NavMobileMenuOpen = styled.div`
   left: 130px;
   z-index: 1;
   background-color: white;
-  /* transform: ${(props) =>
-    props.menuOpen ? "translateX(0)" : "translateX(10%)"};
-  transition: transform 0.2s; */
 `;
 
 const NavMobileCloseWrapper = styled.div`

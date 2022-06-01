@@ -17,9 +17,12 @@ const ImageBody = () => {
   return (
     <ImageWrapper>
       {windowWidth <= 450 ? (
-        <ImageGuy src="images/image-hero-mobile.png" alt="" />
+        <ImageGuy src="images/image-hero-mobile.png" alt="person with laptop" />
       ) : (
-        <ImageGuy src="images/image-hero-desktop.png" alt="" />
+        <ImageGuy
+          src="images/image-hero-desktop.png"
+          alt="person with laptop"
+        />
       )}
     </ImageWrapper>
   );
@@ -35,18 +38,13 @@ const ImageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* margin-right: 269px; */
   @media screen and (max-width: 450px) {
-    /* padding-top: 0px; */
     max-width: 100%;
     width: 100%;
   }
 `;
 
 const ImageGuy = styled.img`
-  /* max-width: 50%;
-  width: 50%;
-  height: auto; */
   width: 100%;
   height: 100%;
   object-fit: contain;
