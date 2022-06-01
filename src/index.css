@@ -13,7 +13,7 @@ code {
 }
 
 .MuiButton-textSecondary{
-  color: #838783 !important;
+  color: #6b6d6b !important;
 }
 
 .css-et1ao3-MuiTypography-root {
@@ -21,12 +21,12 @@ code {
   font-size: 1.5rem !important;
   font-weight: 400;
   line-height: 1.5;
-  color: #838783;
+  color: #6b6d6b !important;
 }
 
 .css-1m4ljmh-MuiTypography-root, .css-1qvr50w-MuiTypography-root {
   font-size: 1.5rem !important;
-  color: #838783;
+  color: #6b6d6b !important;
 }
 
 .css-1qvr50w-MuiTypography-root{
@@ -41,19 +41,15 @@ code {
   flex: 0   !important;
 }
 
-
-
 .css-1elwnq4-MuiPaper-root-MuiAccordion-root{
   box-shadow: none !important;
   position: unset   !important;
 }
 
-
-/* .css-i4bv87-MuiSvgIcon-root{
-  padding-left: 10px;
-
-} */
-
-.css-yw020d-MuiAccordionSummary-expandIconWrapper{
-    padding-left: 10px;
+.css-o4b71y-MuiAccordionSummary-content.Mui-expanded{
+  padding-right: 10px;
 }
+.css-o4b71y-MuiAccordionSummary-content{
+  padding-right: 10px;
+}
+
