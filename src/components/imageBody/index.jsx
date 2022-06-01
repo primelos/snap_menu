@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const ImageBody = () => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    window.addEventListener("resize", () => setWindowWidth(window.innerWidth));
+
+    return () => {
+      window.removeEventListener("resize", () =>
+        setWindowWidth(window.innerWidth)
+      );
+    };
+  }, []);
+
   return (
     <ImageWrapper>
-      <ImageGuy src="images/image-hero-desktop.png" alt="" />
+      {windowWidth <= 450 ? (
+        <ImageGuy src="images/image-hero-mobile.png" alt="" />
+      ) : (
+        <ImageGuy src="images/image-hero-desktop.png" alt="" />
+      )}
     </ImageWrapper>
   );
 };
@@ -20,6 +36,11 @@ const ImageWrapper = styled.div`
   justify-content: center;
   align-items: center;
   /* margin-right: 269px; */
+  @media screen and (max-width: 450px) {
+    /* padding-top: 0px; */
+    max-width: 100%;
+    width: 100%;
+  }
 `;
 
 const ImageGuy = styled.img`

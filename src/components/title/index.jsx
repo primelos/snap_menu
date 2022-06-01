@@ -6,15 +6,23 @@ const Title = () => {
   return (
     <TitleWrapper>
       <Header1>
-        Make <br /> remote work
+        Make {window.innerWidth < 451 ? "" : <br />} remote work
       </Header1>
-      <IntroText>
-        Get your team in sync, no matter your location.
-        <br />
-        Streamline processess, create team rituals, and
-        <br />
-        watch productivity soar.
-      </IntroText>
+      {window.innerWidth < 451 ? (
+        <IntroText>
+          Get your team in sync, no matter your <br /> location. Streamline
+          processess, create <br /> team rituals, and watch productivity soar.
+        </IntroText>
+      ) : (
+        <IntroText>
+          Get your team in sync, no matter your location.
+          <br />
+          Streamline processess, create team rituals, and
+          <br />
+          watch productivity soar.
+        </IntroText>
+      )}
+
       <StyledButton>
         L<span style={{ textTransform: "lowercase" }}>earn More</span>
       </StyledButton>
@@ -41,11 +49,20 @@ const TitleWrapper = styled.div`
   /* margin-left: 300px; */
   /* margin-right: 100px; */
   flex: 1;
+  @media screen and (max-width: 450px) {
+    align-items: center;
+    text-align: center;
+  }
 `;
 
 const Header1 = styled.h1`
-  font-size: 6rem;
-  font-weight: bold; ;
+  font-size: 5rem;
+  font-weight: bold;
+  @media screen and (max-width: 450px) {
+    font-size: 2.8rem;
+    max-width: 95%;
+    width: 100%;
+  }
 `;
 
 const IntroText = styled.p`
@@ -53,21 +70,34 @@ const IntroText = styled.p`
   padding-bottom: 40px;
   line-height: 1.5;
   font-size: 18px;
+  @media screen and (max-width: 450px) {
+    color: #6b6d6b !important;
+    font-weight: 500 !important;
+  }
 `;
 
 const IconWrapper = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 100px;
+  /* margin-top: 100px; */
   width: 70%;
+  @media screen and (max-width: 450px) {
+    width: 90%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+`;
+
+const Icon = styled.img`
+  width: 70px;
 `;
 
 const StyledButton = styled(Button)`
   background-color: black !important;
   color: white !important;
   font-size: 18px !important;
-  border-radius: 10px !important;
+  border-radius: 12px !important;
   width: 151px !important;
   font-weight: 600 !important;
   padding: 10px 0 !important;
@@ -77,5 +107,3 @@ const StyledButton = styled(Button)`
     border: solid 1px black !important;
   }
 `;
-
-const Icon = styled.img``;

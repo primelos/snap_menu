@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
@@ -17,29 +17,7 @@ const NavBar = ({ menuOpen, setMenuOpen }) => {
   const [popOver2, setPopover2] = useState({ anchorEl: null });
   // const [menuOpen, setMenuOpen] = useState(false);
   // const [anchorEl, setAnchorEl] = React.useState(null);
-  const navRef = useRef(null);
-
-  const theme = createTheme({
-    status: {
-      danger: "#e53e3e",
-    },
-    palette: {
-      primary: {
-        main: "#0971f1",
-        darker: "#053e85",
-      },
-      neutral: {
-        main: "#64748B",
-        contrastText: "#fff",
-      },
-    },
-  });
-
-  // const handleClick = (event) => {
-  //   // navRef.current =
-  //   console.log(event.target.childNodes[0].textContent);
-  //   setAnchorEl(event.target.childNodes[0].textContent);
-  // };
+  const navRef = useRef();
 
   const handleClose = () => {
     // setAnchorEl(null);
@@ -48,18 +26,38 @@ const NavBar = ({ menuOpen, setMenuOpen }) => {
   };
 
   const testMe = (e) => {
-    console.log(e.target.childNodes[0]);
-    console.log("navRef", navRef);
     e.target.childNodes[0].textContent === "eatures" ||
     e.target.childNodes[0].textContent === "F"
       ? setPopover1({ ...popOver1, anchorEl: e.currentTarget })
       : setPopover2({ ...popOver2, anchorEl: e.currentTarget });
   };
 
-  const handleMenu = () => {
+  useEffect(() => {
+    let test = navRef.current;
+    console.log(test);
+    function handleClickOutside(event) {
+      if (navRef.current && !navRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    }
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    handleClickOutside(navRef);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [setMenuOpen, navRef]);
+
+  const handleMenu = (e) => {
+    console.log("e", e);
+    // useRef(e.currentTarget).childNodes[0].textContent === "Features"
+    // navRef.current = e.target.
+
     setMenuOpen(!menuOpen);
   };
 
+  console.log("window", window);
   const [expanded, setExpanded] = React.useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
@@ -74,8 +72,7 @@ const NavBar = ({ menuOpen, setMenuOpen }) => {
         <img src="/images/logo.svg" alt="" />
       </NavImgWrapper>
       <NavWrapper>
-        <NavMenuButton
-          ref={navRef}
+        <NavMenu
           aria-describedby={"pop1"}
           variant="text"
           color="secondary"
@@ -83,7 +80,7 @@ const NavBar = ({ menuOpen, setMenuOpen }) => {
         >
           F<span style={{ textTransform: "lowercase" }}>eatures</span>
           {popOver1.anchorEl ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-        </NavMenuButton>
+        </NavMenu>
         <Popover
           id={"pop1"}
           open={Boolean(popOver1.anchorEl)}
@@ -154,10 +151,10 @@ const NavBar = ({ menuOpen, setMenuOpen }) => {
           <TypographyContainer sx={{ p: 2 }}>Our Team</TypographyContainer>
           <TypographyContainer sx={{ p: 2 }}>Blog</TypographyContainer>
         </Popover>
-        <Button variant="text" color="secondary">
+        <Button variant="text" color="secondary" sx={{ fontWeight: "600" }}>
           C<span style={{ textTransform: "lowercase" }}>areers</span>
         </Button>
-        <Button variant="text" color="secondary">
+        <Button variant="text" color="secondary" sx={{ fontWeight: "600" }}>
           A<span style={{ textTransform: "lowercase" }}>bout</span>
         </Button>
       </NavWrapper>
@@ -165,13 +162,17 @@ const NavBar = ({ menuOpen, setMenuOpen }) => {
         {/* //material ui iconsNavBarContainer */}
 
         <NavButtonWrapper>
-          <LoginButton variant="text" color="secondary">
+          <LoginButton
+            variant="text"
+            color="secondary"
+            sx={{ fontWeight: "600" }}
+          >
             L<span style={{ textTransform: "lowercase" }}>ogin</span>
           </LoginButton>
           <RegisterButton
             variant="text"
             color="secondary"
-            sx={{ border: "solid 1px" }}
+            sx={{ border: "solid 2px", fontWeight: "600" }}
           >
             R<span style={{ textTransform: "lowercase" }}>egister</span>
           </RegisterButton>
@@ -182,7 +183,7 @@ const NavBar = ({ menuOpen, setMenuOpen }) => {
           // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
           // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
           // <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
-          <NavMobileMenuOpen>
+          <NavMobileMenuOpen ref={navRef}>
             <NavMobileCloseWrapper>
               <NavMobileClose
                 onClick={() => handleMenu()}
@@ -272,10 +273,7 @@ const NavBar = ({ menuOpen, setMenuOpen }) => {
                 <CardHeaderContainer title="Blog" />
               </AccordionDetails>
             </Accordion>
-            <Accordion
-              expanded={expanded === "panel3"}
-              onChange={handleChange("panel3")}
-            >
+            <Accordion>
               <AccordionSummary
                 aria-controls="panel3bh-content"
                 id="panel3bh-header"
@@ -285,10 +283,7 @@ const NavBar = ({ menuOpen, setMenuOpen }) => {
                 </Typography>
               </AccordionSummary>
             </Accordion>
-            <Accordion
-              expanded={expanded === "panel4"}
-              onChange={handleChange("panel4")}
-            >
+            <Accordion>
               <AccordionSummary
                 aria-controls="panel4bh-content"
                 id="panel4bh-header"
@@ -298,10 +293,23 @@ const NavBar = ({ menuOpen, setMenuOpen }) => {
                 </Typography>
               </AccordionSummary>
             </Accordion>
+
+            <NavButtonWrapper>
+              <LoginButton variant="text" color="secondary">
+                L<span style={{ textTransform: "lowercase" }}>ogin</span>
+              </LoginButton>
+              <RegisterButton
+                variant="text"
+                color="secondary"
+                sx={{ border: "solid 1px" }}
+              >
+                R<span style={{ textTransform: "lowercase" }}>egister</span>
+              </RegisterButton>
+            </NavButtonWrapper>
           </NavMobileMenuOpen>
         ) : (
           <NavMobileMenu
-            onClick={() => handleMenu()}
+            onClick={(e) => handleMenu(e)}
             src="/images/icon-menu.svg"
           />
         )}
@@ -322,6 +330,7 @@ const NavBarContainer = styled.div`
   @media screen and (max-width: 450px) {
     justify-content: space-between;
     margin-right: 30px;
+    margin-bottom: 80px;
   }
 `;
 
@@ -354,6 +363,13 @@ const LoginWrapper = styled.div`
 
 const NavButtonWrapper = styled.section`
   margin-right: 30px;
+  @media screen and (max-width: 450px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+  }
 `;
 
 const LoginButton = styled(Button)`
@@ -365,10 +381,14 @@ const LoginButton = styled(Button)`
     color: black !important;
     background-color: transparent !important;
   }
+  @media screen and (max-width: 450px) {
+    color: #6b6d6b !important;
+    font-weight: 600 !important;
+  }
 `;
 
 const RegisterButton = styled(Button)`
-  border-radius: 10px !important;
+  border-radius: 12px !important;
   padding-left: 20px !important;
   padding-right: 20px !important;
 
@@ -376,6 +396,12 @@ const RegisterButton = styled(Button)`
     border: 1px black solid !important;
     color: black !important;
     background-color: transparent !important;
+  }
+  @media screen and (max-width: 450px) {
+    width: 80%;
+    color: #6b6d6b !important;
+    border: 2px solid #6b6d6b !important;
+    font-weight: 600 !important;
   }
 `;
 
@@ -395,7 +421,7 @@ const TypographyContainer = styled(Typography)`
   display: flex;
   /* justify-content: space-between !important; */
   align-items: center;
-  color: #838783 !important;
+  color: #6b6d6b !important;
 `;
 
 const NavMenuButton = styled(Button)`
@@ -405,6 +431,8 @@ const NavMenuButton = styled(Button)`
 `;
 
 const NavMenu = styled(Button)`
+  font-weight: 600 !important;
+
   &:hover {
     background-color: transparent !important;
   }
@@ -414,6 +442,8 @@ const NavMobileWrapper = styled.div``;
 
 const NavMobileMenu = styled.img`
   display: none;
+  width: 25px;
+  height: auto;
 
   @media screen and (max-width: 450px) {
     display: block;
@@ -440,6 +470,9 @@ const NavMobileMenuOpen = styled.div`
   left: 130px;
   z-index: 1;
   background-color: white;
+  /* transform: ${(props) =>
+    props.menuOpen ? "translateX(0)" : "translateX(10%)"};
+  transition: transform 0.2s; */
 `;
 
 const NavMobileCloseWrapper = styled.div`

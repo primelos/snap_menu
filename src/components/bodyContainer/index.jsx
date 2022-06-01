@@ -31,4 +31,9 @@ const Container = styled.div`
   height: 80vh;
   width: 1370px;
   margin: 0 104px;
+  @media screen and (max-width: 450px) {
+    flex-direction: column-reverse;
+    width: 100%;
+    margin: 0 0;
+  }
 `;
