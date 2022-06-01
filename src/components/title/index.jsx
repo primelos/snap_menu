@@ -27,10 +27,10 @@ const Title = () => {
         L<span style={{ textTransform: "lowercase" }}>earn More</span>
       </StyledButton>
       <IconWrapper>
-        <Icon src="/images/client-databiz.svg" alt="" />
-        <Icon src="/images/client-audiophile.svg" alt="" />
-        <Icon src="/images/client-meet.svg" alt="" />
-        <Icon src="/images/client-maker.svg" alt="" />
+        <Icon src="/images/client-databiz.svg" alt="data biz" />
+        <Icon src="/images/client-audiophile.svg" alt="audio phile" />
+        <Icon src="/images/client-meet.svg" alt="meet" />
+        <Icon src="/images/client-maker.svg" alt="maker" />
       </IconWrapper>
     </TitleWrapper>
   );
@@ -46,8 +46,6 @@ const TitleWrapper = styled.div`
   width: 100%;
   height: 100%;
   text-align: start;
-  /* margin-left: 300px; */
-  /* margin-right: 100px; */
   flex: 1;
   @media screen and (max-width: 450px) {
     align-items: center;
@@ -80,7 +78,6 @@ const IconWrapper = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* margin-top: 100px; */
   width: 70%;
   @media screen and (max-width: 450px) {
     width: 90%;
