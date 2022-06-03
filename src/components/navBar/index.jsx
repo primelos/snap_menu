@@ -370,7 +370,8 @@ const LoginButton = styled(Button)`
   }
   @media screen and (max-width: 450px) {
     color: #6b6d6b !important;
-    font-weight: 600 !important;
+    font-weight: 500 !important;
+    font-size: 1.4rem !important;
   }
 `;
 
@@ -387,7 +388,8 @@ const RegisterButton = styled(Button)`
     width: 80%;
     color: #6b6d6b !important;
     border: 2px solid #6b6d6b !important;
-    font-weight: 600 !important;
+    font-weight: 500 !important;
+    font-size: 1.4rem !important;
   }
 `;
 
