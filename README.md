@@ -10,6 +10,11 @@ npm install
 
 ### Screenshot
 
+![Menu](https://github.com/primelos/snap_menu/blob/main/public/images/menu.png)
+![Menu State](https://github.com/primelos/snap_menu/blob/main/public/images/menu-state.png)
+![Mobile Menu ](https://github.com/primelos/snap_menu/blob/main/public/images/mobile-menu.png)
+![Mobile Menu State](https://github.com/primelos/snap_menu/blob/main/public/images/mobile-menu-state.png)
+
 ![](./screenshot.jpg)
 
 ### Links
